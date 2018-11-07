@@ -6,7 +6,6 @@
 const trace = require('.')
 const bytes = await readFile(__dirname + '/' + 'icon.png')
 const traced = await trace(bytes)
-console.log(await svgo.optimize(traced))
 ```
 
 ## API
