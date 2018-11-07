@@ -23,10 +23,14 @@ module.exports = async (
     strokewidth: 0,
   }
 ) => {
-  const pngImage = await sharp(input)
-    .png()
-    .toBuffer()
+  let image = await sharp(input)
+  const { width, height } = await image.metadata()
+  let scale = 1
+  if (width < 512) {
+    scale = width / 1024
+    image.resize(1024)
+  }
+  const pngImage = await image.png().toBuffer()
   const pngData = await pngParser(pngImage, parserOptions)
-  const svgstring = imagedataToSVG(pngData, traceOptions)
-  return svgstring
+  return imagedataToSVG(pngData, { ...traceOptions, scale })
 }
