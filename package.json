@@ -6,7 +6,8 @@
   "license": "MIT",
   "dependencies": {
     "imagetracerjs": "1.2.4",
-    "pngjs": "3.3.3"
+    "pngjs": "3.3.3",
+    "sharp": "0.21.0"
   },
   "devDependencies": {
     "clipboardy": "1.2.3",

@@ -1,4 +1,5 @@
 const { PNG } = require('pngjs')
+const sharp = require('sharp')
 const { imagedataToSVG } = require('imagetracerjs')
 
 const pngParser = (bytes, options = {}) => {
@@ -22,7 +23,10 @@ module.exports = async (
     strokewidth: 0,
   }
 ) => {
-  const png = await pngParser(input, parserOptions)
-  const svgstring = imagedataToSVG(png, traceOptions)
+  const pngImage = await sharp(input)
+    .png()
+    .toBuffer()
+  const pngData = await pngParser(pngImage, parserOptions)
+  const svgstring = imagedataToSVG(pngData, traceOptions)
   return svgstring
 }

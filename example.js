@@ -14,7 +14,7 @@ const svgo = new SVGO({
 })
 
 const init = async () => {
-  const bytes = await readFile(__dirname + '/' + 'icon.png')
+  const bytes = await readFile(__dirname + '/' + 'icon.jpg')
   const traced = await trace(bytes)
   const { data: optimized } = await svgo.optimize(traced)
   clipboardy.writeSync(optimized)
