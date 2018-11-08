@@ -24,13 +24,8 @@ module.exports = async (
   }
 ) => {
   let image = await sharp(input)
-  const { width, height } = await image.metadata()
-  let scale = 1
-  if (width < 512) {
-    scale = width / 1024
-    image.resize(1024)
-  }
   const pngImage = await image.png().toBuffer()
   const pngData = await pngParser(pngImage, parserOptions)
-  return imagedataToSVG(pngData, { ...traceOptions, scale })
+
+  return imagedataToSVG(pngData, traceOptions)
 }
